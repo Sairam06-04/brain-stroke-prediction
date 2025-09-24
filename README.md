@@ -21,7 +21,7 @@ This project is a machine learning web application that predicts the risk of bra
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/YOUR_USERNAME/your-repository-name.git](https://github.com/YOUR_USERNAME/your-repository-name.git)
+    git clone [https://github.com/Sairam06-04/brain-stroke-prediction](https://github.com/YOUR_USERNAME/your-repository-name.git)
     cd your-repository-name
     ```
 
