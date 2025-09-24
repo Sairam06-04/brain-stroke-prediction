@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brain Stroke Prediction</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Brain Stroke Prediction System</h1>
+
+  <div>
+    <input type="file" id="fileInput" accept=".csv">
+    <button onclick="uploadFile()">Upload and Predict</button>
+  </div>
+
+  <div id="visualization">
+    <h2>Visualizations</h2>
+    <h3>Stroke Risk by Age</h3>
+    <img id="chart_age" src="" alt="Age Visualization">
+
+    <h3>Stroke Risk by Gender</h3>
+    <img id="chart_gender" src="" alt="Gender Visualization">
+
+    <h3>Stroke Risk by BMI</h3>
+    <img id="chart_bmi" src="" alt="BMI Visualization">
+
+    <h3>Stroke Risk by Smoking Status</h3>
+    <img id="chart_smoking" src="" alt="Smoking Visualization">
+   
+<!-- Display visualizations -->
+<img src="/static/visualization_images/age_vs_risk.png" alt="Age vs Stroke Risk">
+<img src="/static/visualization_images/bmi_vs_risk.png" alt="BMI vs Stroke Risk">
+
+<!-- Provide a link to download predictions CSV -->
+<a href="/static/predictions.csv" download>Download Predictions</a>
+
+  </div>
+
+  <script>
+    async function uploadFile() {
+      const fileInput = document.getElementById('fileInput');
+      const formData = new FormData();
+      formData.append('file', fileInput.files[0]);
+
+      const response = await fetch('http://127.0.0.1:5000/batch_predict_visualize', {
+        method: 'POST',
+        body: formData
+      });
+
+      const data = await response.json();
+      document.getElementById('chart_age').src = data.visualization_urls.age;
+      document.getElementById('chart_gender').src = data.visualization_urls.gender;
+      document.getElementById('chart_bmi').src = data.visualization_urls.bmi;
+      document.getElementById('chart_smoking').src = data.visualization_urls.smoking_status;
+    }
+  </script>
+</body>
+</html>
